@@ -1,0 +1,50 @@
+services:
+
+  consul:
+    image: hashicorp/consul:1.18
+    container_name: consul
+    ports:
+      - "8500:8500"
+    command: ["agent", "-dev", "-client", "0.0.0.0"]
+    networks:
+      - appnet
+
+  server-a:
+    build: ./server-a
+    container_name: server-a
+    depends_on:
+      - consul
+    networks:
+      - appnet
+
+  server-b:
+    build: ./server-b
+    container_name: server-b
+    depends_on:
+      - consul
+    networks:
+      - appnet
+
+  server-c:
+    build: ./server-c
+    container_name: server-c
+    depends_on:
+      - consul
+    networks:
+      - appnet
+
+  api-gateway:
+    build: ./api-gateway
+    container_name: api-gateway
+    ports:
+      - "8080:8080"
+    depends_on:
+      - server-a
+      - server-b
+      - server-c
+      - consul
+    networks:
+      - appnet
+
+networks:
+  appnet:
