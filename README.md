@@ -1,4 +1,10 @@
 # Service Discovery with Consul, Node.js, and Docker Compose
+# Service Discovery with Consul
+
+This is my submission for the Roadmap.sh Service Discovery project.
+
+Project URL:
+https://roadmap.sh/projects/service-discovery?fl=0
 
 This project demonstrates a simple microservices architecture using:
 
